@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
+  <display-name>jsp03_MVC01_Servlet</display-name>
+  
+  <!-- 실행될 파일의 순서를 지정해줄 수 있다. -->
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  
+  <servlet>
+  	<!-- Servlet의 이름을 mvc라고 임의로 지정해놓았고 -->
+  	<servlet-name>mvc</servlet-name>
+  	<!-- Servlet의 class 위치를 지정해 주었다. -->
+  	<servlet-class>com.controller.BoardController</servlet-class>
+  </servlet>
+  
+  <!-- mapping : 연결해주는 것 -->
+  <servlet-mapping>
+  
+  <!-- controller.do라는 요청이 오면 Servletname이 mvc인 애와 연결해줄 것이다. -->
+  <!-- mvc를 찾아갈 건데 이와 연결되있는 url으로 이동해줄거라는 의미이다. -->
+  <!-- /는 루트라는 의미이다. 없으면 tomcat이 안됌 -->
+  	<servlet-name>mvc</servlet-name>
+  	<url-pattern>/controller.do</url-pattern>
+  </servlet-mapping>
+</web-app>
+
+<!-- 
+해당 프로젝트 전체에서 사용할 수 있는 변수
+context-param / param-name / param-value
+
+해당 servlet안에서만 사용할 수 있는ㄴ변수. servlet이 init되어있어야한다.(생성되어있어야한다.)
+
+load-on-startup : 해당 servlet를 언제 실행할꺼냐 물어보는 태그. 가장 먼저 실행 시 1
+init-param / param-name / param-value
+ -->
