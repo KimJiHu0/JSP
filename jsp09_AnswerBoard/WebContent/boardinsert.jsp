@@ -18,7 +18,7 @@
 		<tr>
 			<th>작성자</th>
 			<td>
-				<input type="text" name="writer" placeholder="이름을 입력하세요"/>
+				<input type="text" name="writer" placeholder="이름을 입력하세요" autofocus="autofocus"/>
 			</td>
 		</tr>
 		<tr>

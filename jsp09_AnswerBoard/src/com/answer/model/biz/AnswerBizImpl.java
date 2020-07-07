@@ -34,6 +34,10 @@ public class AnswerBizImpl implements AnswerBiz {
 	public int delete(int boardno) {
 		return dao.delete(boardno);
 	}
+	
+	public int multiDelete(String[] boardno) {
+		return dao.multiDelete(boardno);
+	}
 
 	@Override
 	public int answerProc(AnswerDto dto) {

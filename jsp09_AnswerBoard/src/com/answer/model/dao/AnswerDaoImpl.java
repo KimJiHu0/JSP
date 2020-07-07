@@ -221,5 +221,58 @@ public class AnswerDaoImpl implements AnswerDao {
 		}
 		return res;
 	}
+	public int multiDelete(String[] boardno) {
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		int res = 0;
+		
+		String sql = " UPDATE ANSWERBOARD SET DELFLAG = 'Y' WHERE BOARDNO = ? ";
+		//삭제에 성공하면 성공한 값들을 담아줄 배열 변수.
+		int[] cnt = null;
+		
+		try {
+			pstm = con.prepareStatement(sql);
+			/*
+			 * 삭제할 값을 여러개 받기 위해서 반복문을 통해 물음표 값을 넣고
+			 * addBatch를 사용하고 있다. 임시적으로 메모리에 넣고 이따가 executeBatch를 호출하면 한번에 삭제.
+			 */
+			
+			/*
+			 * checked된 것의 길이만큼 for문을 도는데 sql구문에 checked된 번호를 대입해준다.
+			 * 1,3,5번을 삭제한다치면 [1,3,5]로 대입이 된다. 배열이기 때문에.
+			 * i번지가 0번지일 때 첫번째 물음표에 0번지에 있는 1을 대입해서 pstm에 담고,
+			 * i번지가 1번지일 때 두번째 물음표에 1번지에 있는 3을 대입해서 pstm에 담는걸 반복
+			 */
+			for(int i = 0; i < boardno.length; i++) {
+				pstm.setString(1, boardno[i]);
+				
+				//pstm에 담긴 값들을 addBatch를 이용해서 메모리에 적재해둔다.
+				pstm.addBatch();
+				System.out.println("삭제할 번호 : " + boardno[i]);
+			}
+			//위에서 1,3,5를 삭제한다고 하면 삭제 성공 시 리턴값을 담는 변수이다.
+			//배열형식이라 [] 안에 담기는데 삭제에 성공하면 -2를 리턴하고 실패하면 -3을 리턴한다.
+			//3개의 row를 삭제해야하니 -2,-2,-2이니 cnt에 값을 담을 땐 [-2, -2, -2]가 리턴된다.
+			cnt = pstm.executeBatch();
+			
+			for(int i = 0; i < cnt.length; i++){
+				//만일 삭제에 성공했다면 res를 ++해준다.
+				if(cnt[i] == -2) {
+					res++;
+				}
+			}
+			
+			//내가 삭제하려고 checked한 값과 삭제성공한 갯수와 값이 같다면!(만일 다 성공했다면)
+			if(boardno.length == res) {
+				commit(con);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstm);
+			close(con);
+		}
+		return res;
+	}
 
 }

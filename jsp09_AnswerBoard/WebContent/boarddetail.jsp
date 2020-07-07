@@ -18,7 +18,7 @@
 		<tr>
 			<th>작성자</th>
 			<td>
-				<jsp:getProperty property="writer" name="dto"/>
+				<jsp:getProperty property="writer" name="dto" />
 			</td>
 		</tr>
 		<tr>

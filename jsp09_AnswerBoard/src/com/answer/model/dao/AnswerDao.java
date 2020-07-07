@@ -19,6 +19,7 @@ public interface AnswerDao {
 	public int insert(AnswerDto dto);
 	public int update(AnswerDto dto);
 	public int delete(int boardno);
+	public int multiDelete(String[] boardno);
 	
 	public int answerUpdate(int parentboardno);
 	public int answerInsert(AnswerDto dto);

@@ -138,6 +138,20 @@ public class AnswerController extends HttpServlet {
 				response.sendRedirect("failpage.jsp");
 			}
 		}
+		
+		//체크삭제!!
+		else if(command.equals("multidel")) {
+			//chk의 id를 가진애의 value값들을 가져와서 담은것
+			String[] boardno = request.getParameterValues("chk");
+			
+			int res = biz.multiDelete(boardno);
+			
+			if(res > 0) {
+				response.sendRedirect("controller.do?command=boardlist");
+			} else {
+				response.sendRedirect("failpage.jsp");
+			}
+		}
 	
 	}
 

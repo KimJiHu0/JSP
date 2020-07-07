@@ -19,7 +19,7 @@
 		<tr>
 			<th>제목</th>
 			<td>
-				<input type="text" name="title" value="RE:${dto.title}"/>
+				<input type="text" name="title" value="RE:${dto.title}" autofocus="autofocus"/>
 			</td>
 		</tr>
 		<tr>
