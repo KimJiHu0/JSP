@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+ function getParameterValues(){
+	 //name이라는 변수에 name의 val값을 가져와서 붙인다. 결과 : name=ㅇㅇ;
+	 var name = "name=" + $("#name").val();
+	 //kor이라는 변수는 이제 kor=$("#kor").val()이다.
+	 var kor = "kor=" + $("#kor").val();
+	 var eng = "eng=" + $("#eng").val();
+ 	 var math = "math=" + $("#math").val();
+ 	 
+ 	 //queryString이라는 변수에 ?name&kor&eng&math 형식으로 나온다.
+ 	 var queryString = "?"+name+"&"+kor+"&"+eng+"&"+math;
+ 	 console.log(queryString);
+ 	 
+ 	 return queryString;
+ }
+ 
+ $(function(){
+	 //만일 process라는 버튼을 클릭하게 된다면 함수가 실핸된다.
+	$("#process").click(function(){
+		$.ajax({
+			//이동하려는 url은 score.do이고 값을 가져가는 것은 위에서 만든
+			//return값이다. return값은 ?name&kor&eng&math; 이다.
+			url : "score.do"+getParameterValues(),
+			/*
+			현재 요청하는 타입 그리고 응답하는 타입은 String 타입이다.
+			data : 요청하는 것
+			datatype : 응답하는 것
+			score에서 응답하는 형태의 문자열, 그걸 받을 떄에는 dateType : "JSON"
+			이라고 작성하면 JSON타입으로 값을 받아올 수 있다.
+			dataType를 작성하지 않으면 요청값과 응답값 모두 String이다.
+			JSON을 사용하기 위해서는 WebContent 밑에 WEB-INF밑에 lib폴더 안에
+			json-simple-1.1.jar파일을 넣어줘야한다.
+			*/
+			dataType : "json",
+			//URL연결에 성공한다면
+			success : function(msg){
+				//json타입으로 받아왔기 때문에
+				//msg.name을 사용할 수 있다. String값을 그대로 받아오면 주소값이 출력된다.
+				$("#result").html(msg.name+" 님의 총점은 " + msg.sum + " 이고, 평균은 " + msg.avg + "이다.");
+			},
+			//URL연결에 실패한다면
+			erorr : function(){
+				alert("통신 실패");
+			}
+		});
+	});
+ });
+</script>
+</head>
+<body>
+	<h1>성적 처리 프로그램</h1>
+	
+	이름 : <input type="text" id="name"/> <br/>
+	국어 : <input type="text" id="kor"/> <br/>
+	영어 : <input type="text" id="eng"/> <br/>
+	수학 : <input type="text" id="math"/> <br/>
+	
+	<input type="button" value="성적확인" id="process"/><br/>
+	<div id = "result"></div>
+</body>
+</html>
