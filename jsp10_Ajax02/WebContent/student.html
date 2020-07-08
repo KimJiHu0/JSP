@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- js를 외부에 작성하였기 때문에 가져와 쓰기 위해서는 src를 ./인 [현재 이 페이지와 동일한 디렉토리에 위치한] js파일로 지정해준다. -->
+<script type="text/javascript" src="./score.js"></script>
+</head>
+<body>
+<h1>성적확인</h1>
+	이름 : <input type="text" id="name"/> <br/>
+	국어 : <input type="text" id="kor"/> <br/>
+	영어 : <input type="text" id="eng"/> <br/>
+	수학 : <input type="text" id="math"/> <br/>
+	
+	<input type="button" value="성적확인" onclick="load();"/>
+	<div id="result"></div>
+</body>
+</html>
