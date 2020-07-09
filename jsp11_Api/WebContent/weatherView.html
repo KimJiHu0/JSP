@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script src="http://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="weatherAjax.js"></script>
+
+</head>
+<body>
+	<h1>* 기상청이 제공하는 우리동네 날씨 *</h1>
+	
+	<table border="1">
+		<tr>
+			<td colspan="8" bgcolor="skyblue"><b>* 지 역 *</b></td>
+		</tr>
+		<tr>
+			<td colspan="3">주소를 선택 하세요
+			<select id="address">
+				<option value= "4111757000">경기도 수원시 영통1동</option>
+				<option value= "4141051000">경기도 군포시 군포1동</option>
+			</select>
+			<td><input type="button" id="weaView" value="날씨보기"></td>
+		</tr>
+		<tr>
+			<td>좌표</td>
+			<td colspan="3">
+				위도 : <input type="text" id="x" readonly>
+				경도 : <input type="text" id="y" readonly>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4" bgcolor="skyblue"><b>* 현재 날씨 *</b></td>
+		</tr>
+		<tr>
+			<td>기준시간</td>
+			<td colspan="2"><input type="text" id="pubDate" size="50%" readonly></td>	
+			<td rowspan="5" align="center"><img src="" id="weather_img" width="150" height="150"></td>	
+		</tr>
+		<tr>
+			<td>날씨</td>
+			<td colspan="2"><input type="text" id="wfKor" readonly></td>		
+		</tr>
+		<tr>
+			<td>기온</td>
+			<td colspan="2"><input type="text" id="temp" readonly></td>		
+		</tr>
+		<tr>
+			<td>습도</td>
+			<td colspan="2"><input type="text" id="reh" readonly></td>		
+		</tr>
+		<tr>
+			<td>강수확률</td>
+			<td><input type="text" id="pop" readonly></td>		
+		</tr>
+	</table>
+</body>
+</html>
