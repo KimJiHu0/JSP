@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+environments : mybatis 환경설정
+jdbc에서 트랜잭션
+데이터소스는 POOLED
+url, username, password 지정
+
+★Content Model : (properties?, settings?, typeAliases?, typeHandlers?, objectFactory?, 
+ objectWrapperFactory?, reflectorFactory?, plugins?, environments?, databaseIdProvider?, mappers?)
+ 순서대로 작성해야 오류안남.
+ 
+<properties resource="com/my/model/db/db.properties"></properties>를 찾아 읽어옴
+그 안에는 driver, username, password, url을 입력했음
+그거 가져와서 ${}로 사용했음
+
+ 
+ <typeAlias type="com.my.model.dto.MyDto" alias="myDto"/> : mybatis안에서는 myDto로 사용할 수 있음(별칭)
+ com.my.model.dto.MyDto 클래스 타입을 myDto로 줄여서 쓰겠다.
+ 
+   <mappers>
+    <mapper resource="com/my/model/db/mybatis-mapper.xml"/>
+  </mappers>
+  는 mapper.xml이랑 묶어주겠다고 볼 수 있다.
+ -->
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>
+
+<properties resource="com/my/model/db/db.properties"></properties>
+
+<typeAliases>
+	<typeAlias type="com.my.model.dto.MyDto" alias="myDto"/>
+</typeAliases>
+
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+      </dataSource>
+    </environment>
+  </environments>
+  <mappers>
+    <mapper resource="com/my/model/db/mybatis-mapper.xml"/>
+  </mappers>
+</configuration>
