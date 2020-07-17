@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<!-- 
+        <property name="driver" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+        
+        property는 속성?을 의미할 수 있다.
+        DB와 연결하려는 xml파일이라고도 할 수 있는데 driver와 url, user, password를
+                  연동해주는 것이다. db.properties에서 설정해준 것들을 가져와서 사용한다.
+        
+        <typeAliases>
+			<typeAlias type="com.muldel.dto.MDBoardDto" alias="mdBoardDto"/>
+		</typeAliases>
+		com.muldel.dto.MDBoardDto파일의 별칭을 mdBoard로 칭한다는 뜻이다.
+		앞으로 dto를 사용할 때 mdBoard라고 작성하여 사용할 수 있다.
+        
+        TransactionManager : JDBC(JDBC의 commit과 rollback를 처리하기 위해 사용)
+       						 MANAGED(컨테이너가 관리)
+        
+       	dataSource : 	UNPOOLED : 매번 커넥션을 열고 닫는다.
+						POOLED : 커넥션 풀이 적용
+						
+		<mapper resource="com/muldel/db/Mapper.xml"/>
+		설정한 것들을 com/muldel/db/mapper.xml경로에 있는 xml파일과 mapping해준다는 뜻.		 
+ -->
+<configuration>
+
+	<properties resource="com/my/model/db/db.properties"></properties>
+	
+	<typeAliases>
+		<typeAlias type="com.my.model.dto.MyDto" alias="dto"/>
+	</typeAliases>
+	
+	<environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+      </dataSource>
+    </environment>
+  </environments>
+  
+  <mappers>
+  	<mapper resource="com/my/model/db/mapper.xml"/>
+  </mappers>
+
+</configuration>
